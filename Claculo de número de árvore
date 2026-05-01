@@ -15,20 +15,16 @@ def ler_matriz():
 def numero_arvores(A):
     A = np.array(A)
 
-    # Matriz de grau
+   
     D = np.diag(A.sum(axis=1))
-
-    # Laplaciana
     L = D - A
 
-    # Remove linha 0 e coluna 0
+ 
     L_reduzida = L[1:, 1:]
 
-    # Determinante
     return round(np.linalg.det(L_reduzida))
 
 
-# 🔹 Programa principal
 A = ler_matriz()
 
 resultado = numero_arvores(A)
