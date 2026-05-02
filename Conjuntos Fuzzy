@@ -1,0 +1,38 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Universo de discurso: idades de 0 a 100 anos
+U = np.arange(0, 101, 1)
+
+# --- Função TRAPEZOIDAL "jovem"
+def trapezoidal(x, a, b, c, d):
+    left  = np.where(x <= a, 0.0, np.where(x <= b, (x - a) / (b - a), 1.0))
+    right = np.where(x >= d, 0.0, np.where(x >= c, (d - x) / (d - c), 1.0))
+    return np.minimum(left, right)
+
+# --- Função TRIANGULAR para 'Adulto' ---
+def triangular(x, a, b, c):
+    left  = np.where(x <= a, 0.0, np.where(x <= b, (x - a) / (b - a), 1.0))
+    right = np.where(x >= c, 0.0, np.where(x >= b, (c - x) / (c - b), 1.0))
+    return np.minimum(left, right)
+
+# --- Função SIGMOIDAL para 'Idoso' ---
+def sigmoidal(x, c, k):
+    return 1 / (1 + np.exp(-k * (x - c)))
+
+# Aplicando ao universo
+jovem  = trapezoidal(U,  0,  0, 15, 35)
+adulto = triangular(U,  20, 40, 65)
+idoso  = sigmoidal(U,   60,  0.15)
+
+# Plot
+plt.figure(figsize=(10, 6))
+plt.plot(U, jovem,  label='Jovem (trapezoidal)')
+plt.plot(U, adulto, label='Adulto (triangular)')
+plt.plot(U, idoso,  label='Idoso (sigmoidal)')
+plt.legend()
+plt.title('Funções de Pertinência')
+plt.xlabel('Idade')
+plt.ylabel('Grau de Pertinência')
+plt.grid(True)
+plt.show()
