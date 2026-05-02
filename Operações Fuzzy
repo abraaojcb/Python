@@ -1,0 +1,20 @@
+# União: max(jovem, adulto)
+uniao = np.maximum(jovem, adulto)
+
+# Interseção: min(adulto, idoso)
+intersecao = np.minimum(adulto, idoso)
+
+# Complemento de jovem
+complemento = 1 - jovem
+
+# Plot
+plt.figure(figsize=(10, 6))
+plt.plot(U, uniao,       label='União (Jovem ∪ Adulto)')
+plt.plot(U, intersecao,  label='Interseção (Adulto ∩ Idoso)')
+plt.plot(U, complemento, label='Complemento (¬Jovem)')
+plt.legend()
+plt.title('Operações Fuzzy')
+plt.xlabel('Idade')
+plt.ylabel('Grau de Pertinência')
+plt.grid(True)
+plt.show()
